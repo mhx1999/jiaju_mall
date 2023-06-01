@@ -2,6 +2,7 @@ package com.hsp.furns.web;
 
 
 import com.hsp.furns.entity.Manager;
+import com.hsp.furns.entity.Member;
 import com.hsp.furns.service.ManagerService;
 import com.hsp.furns.service.impl.ManagerServiceImpl;
 
@@ -53,7 +54,7 @@ public class ManagerServlet extends BasicServlet {
 
          // 管理员登录成功后，显示管理菜单页面
 
-
+req.getSession().setAttribute("member",new Member(manager.getId(),manager.getUsername(),manager.getUsername(),null));
          req.getRequestDispatcher("/views/manager/manage_menu.jsp")
                  .forward(req, resp);
       }

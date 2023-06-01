@@ -19,6 +19,11 @@ public class CartItem {
 
     private BigDecimal totalPrice;
 
+
+
+
+
+
     public CartItem() {
     }
 

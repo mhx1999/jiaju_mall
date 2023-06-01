@@ -70,6 +70,7 @@ public class MemberServlet extends BasicServlet {
 
         } else {
 //登录成功
+            req.getSession().setAttribute("member",member);
             req.setAttribute("loginUsername",username);
             req.getRequestDispatcher("/views/member/login_ok.jsp")
                     .forward(req, resp);
@@ -178,6 +179,10 @@ req.setAttribute("active","register");
         Object username2 = req.getSession().getAttribute("loginUsername");
         Object isLogin2 = req.getSession().getAttribute("isLogin");
 
+
+        req.getSession().removeAttribute("member");
+
+        
         System.out.println(username2);
         System.out.println(isLogin2);
         System.out.println();

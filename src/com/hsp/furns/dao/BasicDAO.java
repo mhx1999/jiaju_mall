@@ -51,6 +51,8 @@ public class BasicDAO<T> { //泛型指定具体类型
 
         Connection connection = null;
         try {
+            //从数据库连接池获取connection
+            //每次从数据池中取出connection，不能保证是同一个
             connection = JDBCUtilsByDruid.getConnection();
             return qr.query(connection, sql, new BeanListHandler<T>(clazz), parameters);
 

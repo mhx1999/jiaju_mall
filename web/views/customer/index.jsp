@@ -16,6 +16,42 @@
     <link rel="stylesheet" href="assets/css/vendor/vendor.min.css"/>
     <link rel="stylesheet" href="assets/css/plugins/plugins.min.css"/>
     <link rel="stylesheet" href="assets/css/style.min.css">
+<%--    引入jquery--%>
+    <script type="text/javascript" src="script/jquery-3.6.0.min.js"></script>
+
+    <script>
+
+        $(function (){
+
+            //给Add to cart 按钮绑定事件
+
+
+            $("button.add-to-cart").click(function (){
+
+
+          //获取点击的furn-id
+                var furnId = $(this).attr("furnId");
+
+                //发出一个请求添加家居
+                location.href = "cartServlet?action=addItem&id="+furnId;
+
+
+            })
+
+
+
+
+        })
+
+
+
+
+
+
+
+
+    </script>
+
 </head>
 
 <body>
@@ -101,12 +137,12 @@ pageContext.setAttribute("pageTotalCountshouye",pageshouye.getPageTotalCount());
 
 
                         <!-- Single Wedge End -->
-                        <a href="#offcanvas-cart"
-                           class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
+                        <a href="views/cart/cart.jsp"
+                           class="header-action-btn header-action-btn-cart pr-0">
                             <i class="icon-handbag"> 购物车</i>
-                            <span class="header-action-num">88</span>
+                            <span class="header-action-num">${sessionScope.cart.totalCount}</span>
                         </a>
-                        <a href="#offcanvas-mobile-menu"
+                        <a href="#"
                            class="header-action-btn header-action-btn-menu offcanvas-toggle d-lg-none">
                             <i class="icon-menu"></i>
                         </a>
@@ -172,9 +208,15 @@ pageContext.setAttribute("pageTotalCountshouye",pageshouye.getPageTotalCount());
                                                title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
                                                     class="icon-size-fullscreen"></i></a>
                                         </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
+
+                                        <c:if test="${furn.stock == 0}">
+                                        <input type="text" value="暂时缺货" class="add-to-cart">
+                                        </c:if>
+                                        <c:if test="${furn.stock != 0}">
+                                        <button title="Add To Cart" furnId="${furn.id}" class="add-to-cart">Add
                                             To Cart
                                         </button>
+                                        </c:if>
                                     </div>
                                     <div class="content">
                                         <h5 class="title">
